@@ -10,3 +10,16 @@
 
 > ![Bank Application](assets/bankapp-b.png)
 
+## Banking Application Deployment - DevOps Practices
+
+**Tech Stack**
+
+- Docker
+- Kubernetes
+- Kubernetes Dashboard
+- ArgoCD
+- Jenkins
+- SonarQube
+- Git, GitHub
+- Terraform
+- Helm
