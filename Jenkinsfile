@@ -27,7 +27,7 @@ pipeline {
         stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv(credentialsId: 'sonarQubeToken', installationName: 'sonarQubeScanner') {
-                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=bankApplication -Dsonar.projectKey=bank -X"
+                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=bankApplication -Dsonar.projectKey=bank -Dsonar.java.binaries=target/classes -X"
                 }
             }
         }
