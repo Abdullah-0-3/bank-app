@@ -18,6 +18,12 @@ pipeline {
             }
         }
 
+        stage("Installing Dependency") {
+            steps {
+                sh "mvn clean install -DskipTests=True"
+            }
+        }
+
         stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv(credentialsId: 'sonarQubeToken', installationName: 'sonarQubeScanner') {
