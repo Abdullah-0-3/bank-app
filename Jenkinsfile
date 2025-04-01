@@ -6,21 +6,25 @@ pipeline {
     }
     
     stages {
+
         stage("Cleaning Workspace") {
             steps {
                 cleanWs()
             }
         }
+
         stage("Cloning Repository") {
             steps {
                 git url: 'https://github.com/Abdullah-0-3/bank-app', branch: 'master'
             }
         }
+
         stage("Installing Dependency") {
             steps {
                 sh "mvn clean install -DskipTests=True"
             }
         }
+
         stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv(credentialsId: 'sonarQubeToken', installationName: 'sonarQubeScanner') {
@@ -28,6 +32,7 @@ pipeline {
                 }
             }
         }
+
         stage("SonarQube Quality Gates") {
             steps {
                 timeout(time: 2, unit: "MINUTES") {
@@ -35,16 +40,19 @@ pipeline {
                 }
             }
         }
+
         stage("Docker Build") {
             steps {
                 sh "docker build -t bank-app ."
             }
         }
+
         stage("Image Scanning") {
             steps {
                 sh "trivy image --format table bank-app > trivy-scan.txt"
             }
         }
+
         stage("Docker Push") {
             steps {
                 withCredentials([
@@ -61,6 +69,7 @@ pipeline {
                 }
             }
         }
+
     }
     
     post {
