@@ -6,6 +6,11 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS bank_db;
-    CREATE USER IF NOT EXISTS 'bankapp-user'@'%' IDENTIFIED BY 'bankapp-password';
+    
+    # Drop user if exists to avoid errors
+    DROP USER IF EXISTS 'bankapp-user'@'%';
+    
+    # Create user with exact password
+    CREATE USER 'bankapp-user'@'%' IDENTIFIED BY 'bankapp-password';
     GRANT ALL PRIVILEGES ON bank_db.* TO 'bankapp-user'@'%';
     FLUSH PRIVILEGES;
