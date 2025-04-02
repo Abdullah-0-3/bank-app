@@ -5,5 +5,4 @@ metadata:
   namespace: bank-app
 data:
   spring_datasource_url: jdbc:mysql://mysql-service:3306/bank_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-  username: bankapp-user
-  password: bankapp-password
+  mysql_database: bank_db

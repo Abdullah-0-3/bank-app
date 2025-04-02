@@ -23,13 +23,25 @@ spec:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: bank-app-secret
+                  key: root_password
             - name: MYSQL_DATABASE
-              value: bank_db
+              valueFrom:
+                configMapKeyRef:
+                  name: bank-app-config
+                  key: mysql_database
             - name: MYSQL_USER
-              value: bankapp-user
+              valueFrom:
+                secretKeyRef:
+                  name: bank-app-secret
+                  key: username
             - name: MYSQL_PASSWORD
-              value: bankapp-password
+              valueFrom:
+                secretKeyRef:
+                  name: bank-app-secret
+                  key: password
           volumeMounts:
             - name: mysql-storage
               mountPath: /var/lib/mysql
