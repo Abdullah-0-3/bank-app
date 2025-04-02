@@ -15,6 +15,11 @@ spec:
       labels:
         app: frontend 
     spec:
+      initContainers:
+        - name: wait-for-mysql
+          image: mysql:5.7
+          command: ['sh', '-c', 
+            'until mysql -h mysql-service -u bankapp-user -pbankapp-password -D bank_db -e "SELECT 1"; do echo "Waiting for MySQL"; sleep 5; done']
       containers:
         - name: app-container
           image: muhammadabdullahabrar/devops:bank-app
@@ -22,8 +27,24 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://mysql-service:3306/bank_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+              valueFrom: 
+                configMapKeyRef:
+                  name: bank-app-config
+                  key: spring_datasource_url
             - name: SPRING_DATASOURCE_USERNAME
-              value: user
+              valueFrom: 
+                configMapKeyRef:
+                  name: bank-app-config
+                  key: username
             - name: SPRING_DATASOURCE_PASSWORD
-              value: password
+              valueFrom: 
+                configMapKeyRef:
+                  name: bank-app-config
+                  key: password
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5

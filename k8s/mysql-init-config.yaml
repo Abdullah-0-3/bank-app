@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-config
+  namespace: bank-app
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS bank_db;
+    CREATE USER IF NOT EXISTS 'bankapp-user'@'%' IDENTIFIED BY 'bankapp-password';
+    GRANT ALL PRIVILEGES ON bank_db.* TO 'bankapp-user'@'%';
+    FLUSH PRIVILEGES;
