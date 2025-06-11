@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+
+  mysql: 
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    volumes: 
+      - mysql_data:/var/lib/mysql
+    networks:
+      - bank-app
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    
+  bank-app:
+    build: .
+    container_name: bank-app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - bank-app
+
+volumes:
+  mysql_data:
+
+networks:
+  bank-app:
+    driver: bridge
