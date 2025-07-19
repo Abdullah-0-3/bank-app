@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+
+  pre_build:
+    commands:
+      - echo "Logging in to Amazon ECR..."
+      - aws --version
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
+
+  build:
+    commands:
+      - echo "Building the Docker image..."
+      - docker build -t bank-app .
+      - docker tag bank-app:latest $ECR_REPOSITORY_URI:latest
+
+  post_build:
+    commands:
+      - echo "Pushing the Docker image to Amazon ECR..."
+      - docker push $ECR_REPOSITORY_URI:latest
+      - echo "Build completed successfully."
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
