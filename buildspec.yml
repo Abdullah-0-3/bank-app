@@ -12,7 +12,7 @@ phases:
     commands:
       - echo "Building the Docker image..."
       - docker build -t bank-app .
-      - docker tag bank-app:latest $ECR_REPOSITORY_URI:latest
+      - docker tag bank-app:latest $ECR_REPOSITORY_URI
 
   post_build:
     commands:
