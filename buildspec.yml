@@ -17,7 +17,7 @@ phases:
   post_build:
     commands:
       - echo "Pushing the Docker image to Amazon ECR..."
-      - docker push $ECR_REPOSITORY_URI:latest
+      - docker push $ECR_REPOSITORY_URI
       - echo "Build completed successfully."
 
 artifacts:
