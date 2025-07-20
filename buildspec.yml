@@ -19,8 +19,11 @@ phases:
       - echo "Pushing the Docker image to Amazon ECR..."
       - docker push $ECR_REPOSITORY_URI
       - echo "Build completed successfully."
+      - printf '[{"name":"bank-app","imageUri":"%s"}]' "$ECR_REPOSITORY_URI" > imagedefinitions.json
+      - echo "Image definitions file created."
 
 artifacts:
   files:
     - '**/*'
+    - imagedefinitions.json
   discard-paths: yes
