@@ -11,6 +11,8 @@ Deployment of a Banking Application using AWS Services
 * Multi-tier application written in Java (SpringBoot)
 * MySQL for Database in Application
 
+---
+
 ### **Tech Stack**
 
 * GitHub
@@ -22,9 +24,13 @@ Deployment of a Banking Application using AWS Services
 * AWS ECS (Elastic Container Service)
 * Amazon ECR (Elastic Container Registry)
 
+---
+
 ### **Situation**
 
 Deploy a Java-based two-tier banking application that using MySQL database. Goal was to containerize, automate, and deploy application on AWS using Best DevOps Practices. Implemented fully managed AWS CI/CD Pipeline along with Scalable Architecture.
+
+---
 
 ### **Task**
 
@@ -34,6 +40,8 @@ Deploy a Java-based two-tier banking application that using MySQL database. Goal
 - Automate build and deploy process using Amazon CodeBuild and CodePipeline (CI/CD)
 - Setting up Public Internet-facing LoadBalancer to manage traffic
 - Mapping LoadBalancer to Custom Domain to access the Application on Internet
+
+---
 
 ### **Action**
 
@@ -59,6 +67,8 @@ Deploy a Java-based two-tier banking application that using MySQL database. Goal
     - Integreated CloudWatch Logs for both container and Code Pipeline
     - Troubleshooted deployment issues including RollingBack, AlB health configurations, and MySQL Readiness delays
 
+---
+
 ### **Result**
 
 - Reduced manual deployment effort by 90% using end-to-end CI/CD Pipeline
@@ -68,6 +78,12 @@ Deploy a Java-based two-tier banking application that using MySQL database. Goal
 - Increased app accessibility and performance by using ALB + ECS over local docker-compose setup
 - Gained hand-on experience with 6+ core AWS Services like VPC, ECS, ECR, CodeBuild, CodePipline, and ALB
 
-<br>
+---
+
+### **Steps to Deploy**
+
+`In Process`
+
+---
 
 > ![Bank-App-Deployed](/assets/bank-app-deployed.png)
