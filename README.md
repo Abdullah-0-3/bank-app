@@ -13,6 +13,12 @@ Deployment of a Banking Application using AWS Services
 
 ---
 
+### **Archiecture Diagram**
+
+<img width="1408" height="768" alt="Bank Application Archiecture Diagram" src="https://github.com/user-attachments/assets/fafd6308-1713-4600-b522-be61fab8f64f" />
+
+---
+
 ### **Tech Stack**
 
 * GitHub
